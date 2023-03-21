@@ -335,6 +335,9 @@ class CardStyle extends StatefulWidget {
 }
 
 class _CardStyleState extends State<CardStyle> {
+
+  bool _isShown=false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -352,31 +355,108 @@ class _CardStyleState extends State<CardStyle> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text("Your Bankly Card",style: TextStyle(color: Colors.white),),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text("Your ",style: TextStyle(color: Colors.white,fontSize: 30),),
+                  Text("Bankly ",style: TextStyle(color: Colors.lightGreen,fontSize: 30),),
+                  Text("Card ",style: TextStyle(color: Colors.white,fontSize: 30),),
+                ],
+              ),
               SizedBox(height: 20,),
               ClipRRect(
                 borderRadius: BorderRadius.circular(20),
                 child: Container(
                   width: double.infinity,
+                  padding: EdgeInsets.symmetric(horizontal: 20,vertical: 20),
                   decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage("assets/FreebieWebsite.png",),
-                      fit: BoxFit.cover,
-                    ),
+                   gradient: LinearGradient(
+                     colors: <Color>[
+                       Color(0xff45C3B9),
+                       Color(0xff909FC0),
+                     ],
+                   ),
                   ),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Balance"),
-                      Text("2000"),
-                      SizedBox(height: 100,),
-                      TextFormField(initialValue: "Hi There",textInputAction: TextInputAction.none,readOnly: true,decoration: InputDecoration(
-                        suffixIcon: Icon(Icons.visibility)
-                      ),),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text("Balance",style: TextStyle(fontSize: 10,color: Colors.white),),
+                          Image.asset("assets/Icon1.png",scale: 2,)
+                        ],
+                      ),
+                      Text("2000",style: TextStyle(fontSize: 20,color: Colors.white),),
+                      SizedBox(height: 50,),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Text(_isShown?"4737   9618    4974    2489":"****   ****    ****    2489",style: _isShown?TextStyle(fontSize: 20,color: Colors.white):TextStyle(fontSize: 20,color: Colors.white)),
+                          IconButton(icon: _isShown?Icon(Icons.visibility_off,color: Colors.white,):Icon(Icons.visibility,color: Colors.white,),onPressed: (){
+                            setState(() {
+                              _isShown=!_isShown;
+                            });
+                          },)
+                        ],
+                      ),
+                      SizedBox(height: 20,),
+                      
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 20),
+                              child: Text("Card holder name",style: TextStyle(fontSize: 10,color: Colors.grey[300]),),
+                          ),
+
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 50),
+                            child: Text("Expiry date",style: TextStyle(fontSize: 10,color: Colors.grey[300]),),
+                          ),
+                        ],
+                      ),
+
+                      SizedBox(height: 20,),
+
+                      Row(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 10),
+                            child: Text("Jhon Dalmer",style: TextStyle(fontSize: 20,color: Colors.white),),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 30),
+                            child: Text("02/23",style: TextStyle(fontSize: 20,color: Colors.white),),
+                          ),
+                        ],
+                      ),
 
                     ],
                   ),
                 ),
               ),
+
+              SizedBox(height: 50,),
+
+              ElevatedButton(onPressed: (){}, child: Container(color:Colors.grey.shade800,width:double.infinity,height:50,child: Center(child: Text("How to use my card?"))),style: ButtonStyle(backgroundColor: MaterialStatePropertyAll<Color>(Colors.grey.shade800)),),
+              SizedBox(height: 20,),
+              ElevatedButton(onPressed: (){}, child: Container(color:Colors.grey.shade800,width:double.infinity,height:50,child: Center(child: Text("Order?"))),style: ButtonStyle(backgroundColor: MaterialStatePropertyAll<Color>(Colors.grey.shade800)),),
+              SizedBox(height: 20,),
+              ElevatedButton(onPressed: (){}, child: Container(color:Colors.grey.shade800,width:double.infinity,height:50,child: Center(child: Text("Transaction"))),style: ButtonStyle(backgroundColor: MaterialStatePropertyAll<Color>(Colors.grey.shade800)),),
+              SizedBox(height: 20,),
+              
+              SizedBox(height: 20,),
+              
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("Already have a bankly card ?",style: TextStyle(fontSize: 10,color: Colors.white),),
+                  Text("Activate",style: TextStyle(fontSize: 10,color: Colors.lightGreen),)
+                ],
+              )
             ],
           ),
         ),
